@@ -14,7 +14,7 @@ To install the application in Linux, please follow these steps:
 
 1. Open the Linux terminal
 2. download the repository:
-   (in Terminal) "git clone git@github.com:Konservin/filters_test.git"
+   (in Terminal) "git clone git@github.com:Konservin/filter_management_test.git"
 3. move to repository directory:
    (in Terminal) "cd filters_test"
 4. Initialize the application:
