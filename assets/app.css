@@ -1,0 +1,14 @@
+/* Ensure modal body is scrollable */
+.modal-body {
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+/* Keep modal footer fixed at the bottom */
+.modal-footer {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    z-index: 1050;
+    /*box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);*/
+}

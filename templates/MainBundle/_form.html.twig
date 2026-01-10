@@ -1,0 +1,24 @@
+{{ form_start(form, {'action': path('new_filter'), 'attr': {'id': 'filterForm'}}) }}
+{{ form_row(form.name) }}
+{% do form.criteria.setRendered %}
+
+{% set typeChoices = form.criteria.vars.prototype.type.vars.choices %}
+{% set types = typeChoices|map(c => {'id': c.value, 'name': c.label}) %}
+
+<!-- Criteria Table -->
+<div class="table-responsive">
+    <div
+            id="criteria-app"
+            data-initial='{{ (criteria|default([]))|json_encode|e("html_attr") }}'
+            data-types='{{ (types|default([]))|json_encode|e("html_attr") }}'
+    ></div>
+</div>
+{{ form_end(form) }}
+{% if form.vars.errors|length > 0 %}
+    <div class="alert alert-danger js-form-errors">
+        {% for error in form.vars.errors %}
+            <p>{{ error.message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+

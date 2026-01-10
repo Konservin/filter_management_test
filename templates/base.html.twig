@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Filters Test App{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+
+<body class="bg-light">
+<div class="wrapper">
+    <div class="main-panel">
+        <div class="main-content py-4">
+            <div class="container-fluid">
+                {% block body %}
+                    {% block layout_buttons %}
+                        <div class="layout-buttons mb-3">
+                            {% block buttons %}{% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    <hr class="mb-4">
+
+                    {% block content %}{% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>

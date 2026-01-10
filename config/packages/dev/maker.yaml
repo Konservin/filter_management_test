@@ -1,0 +1,4 @@
+maker:
+  generate_final_classes: true
+  generate_final_entities: false
+  root_namespace: 'App'
