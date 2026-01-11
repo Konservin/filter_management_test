@@ -5,10 +5,14 @@ services:
     build: .
     container_name: symfony_php
     working_dir: /var/www/symfony
+    environment:
+      HOME: /tmp
+      YARN_CACHE_FOLDER: /tmp/.yarn-cache
     volumes:
       - .:/var/www/symfony
     depends_on:
       - mysql
+    user: "${UID:-1000}:${GID:-1000}"
 
   mysql:
     image: mysql:8.0

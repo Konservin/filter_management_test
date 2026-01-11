@@ -1,44 +1,116 @@
-Welcome to filters test site!
+# Filter Management Test Application
 
-Recommended server stack:
+This project is a Symfony-based web application for managing **filters** and their **criteria**.
 
-* OS: Linux (Ubuntu 22.04+ recommended) / macOS / Windows with WSL2
-* Web Server: Nginx (configured in Docker) or Apache (if running manually)
-* PHP Version: PHP 8.1+ (Required by composer.json)
-* Database: MySQL 8.0 (Configured in Docker)
-* Node.js: Node.js 16+ (Required for Webpack Encore)
-* Package Manager: Yarn or NPM (for frontend assets)
-* Docker Engine 19.03+
+---
 
-To install the application in Linux, please follow these steps:
+## Tech Stack
 
-1. Open the Linux terminal
-2. download the repository:
-   (in Terminal) "git clone git@github.com:Konservin/filter_management_test.git"
-3. move to repository directory:
-   (in Terminal) "cd filter_management_test"
-4. Initialize the application:
-   (in Terminal) "make setup"
-5. Navigate to project URL in Chrome: "http://localhost:8090"
+- **Backend:** PHP 8.1+, Symfony 6
+- **Database:** MySQL 8.0
+- **ORM:** Doctrine ORM + Migrations
+- **Frontend:** Vue 3 (partial integration), TypeScript
+- **Assets:** Webpack Encore
+- **Web Server:** Nginx
+- **Containerization:** Docker + Docker Compose
+- **Package Managers:** Composer, Yarn
 
-If you run into any permission issues, try pasting into Terminal:
-"make reload_dev".
-If issues persist (local setup can be tricky at times), please contact me at ervin.bernhardt@gmail.com or (+372) 58242472. Reacting to English, Estonian, Finnish, Russian and French requests.
+---
 
-Features:
+## Features
 
-1. Edit existing filters by pressing the "Edit" button next to each filter
-2. Add new filter
-3. Change new filter mode from Modal to FullScreen mode
-4. Add new criteria
-5. Add new criteria to new or existing filters
-6. Delete criteria from new or existing filters
-7. Save new or existing criteria
-8. Toggle criteria subtype and value depending on criteria type
+- Create, edit, and delete filters
+- Add, edit, and remove filter criteria
+- Dynamic criteria form (type → subtype → value)
+- Criteria value input adapts based on selected type
+- Client-side validation with server-side fallback
+- Docker-based development environment
 
-Issues:
+---
 
-1. Can add any number of filters with the same name, needs fixing (not specified in task specs)
-2. Saving filter with no criteria redirects to non-modal form
-3. Scrolling of form elements not supported in non-modal form (not requested in task specs, not critical)
-4. Native bootstrap datepicker is not too aesthetical, needs restyling
+## Requirements
+
+### All platforms
+- Docker Engine 19.03+
+- Docker Compose
+- Make (optional but recommended)
+
+### macOS / Windows
+- Docker Desktop
+- **Windows:** WSL2 enabled (recommended)
+
+---
+
+## Installation
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/Konservin/filter_management_test.git
+cd filter_management_test
+```
+
+### 2. Build and start the application
+```bash
+make setup
+```
+This command performs the following steps: 
+- builds Docker images
+- starts PHP, MySQL, and Nginx containers
+- installs Composer dependencies
+- installs frontend dependencies
+- builds frontend assets
+
+### 3. Manual build and start (without Make)
+If you prefer not to use ```make```, run the steps manually:
+```bash
+docker compose up -d --build
+docker compose exec php composer install
+docker compose exec php yarn install
+docker compose exec php yarn encore dev
+docker compose exec php php bin/console doctrine:migrations:migrate -n
+```
+
+### 4. Open the application
+```bash
+http://localhost:8090
+```
+## Platform Notes
+### Linux
+- Works out of the box on Ubuntu 22.04+.
+
+### macOS
+- Install Docker Desktop
+- Ensure file sharing is enabled for the project directory
+
+### Windows (WSL2)
+- Install Docker Desktop
+- Enable WSL2 integration
+- Run all commands from inside WSL (Ubuntu recommended)
+
+## Common Commands
+### Rebuild containers
+```bash
+docker compose up -d --build
+```
+
+### Stop containers and remove volumes (clean slate)
+```bash
+docker compose down -v
+```
+
+### Rebuild frontend assets
+```bash
+docker compose exec php yarn encore dev
+```
+
+### Troubleshooting
+Port already in use
+Ensure the following ports are free:
+- 8090 — Nginx
+- 3305 — MySQL (optional, only if exposed)
+
+### Check running containers:
+```bash
+docker ps
+```
+If a port is already in use, stop the conflicting container or adjust the port mapping in docker-compose.yml.

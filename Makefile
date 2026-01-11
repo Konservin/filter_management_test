@@ -6,16 +6,20 @@ help:
 	@echo "reload_dev	For debugging purposes, make a simple Docker reload"
 	@echo "*_dev		More dev related commands, look in code"
 
-
 setup:
-	composer install
-	yarn install
-	npm run dev
-	#php bin/console doctrine:schema:update --force # not needed for docker-based app
-	docker-compose down -v
-	docker-compose rm -f
-	docker volume prune -f
-	docker-compose build --no-cache && docker-compose up -d
+	docker compose up -d --build
+	docker compose exec php composer install
+	docker compose exec php yarn install
+	docker compose exec php yarn encore dev
+	#docker compose exec php php bin/console doctrine:migrations:migrate -n
+
+reset:
+	docker compose down -v --remove-orphans
+	docker compose up -d --build
+	docker compose exec php composer install
+	docker compose exec php yarn install
+	docker compose exec php yarn encore dev
+	#docker compose exec php php bin/console
 
 reload_dev:
 	sudo chown -R 33:33 .
