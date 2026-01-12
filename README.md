@@ -70,7 +70,7 @@ docker compose up -d --build
 docker compose exec php composer install
 docker compose exec php yarn install
 docker compose exec php yarn encore dev
-docker compose exec php php bin/console doctrine:migrations:migrate -n
+docker compose exec php php bin/console cache:clear
 ```
 
 ### 4. Open the application

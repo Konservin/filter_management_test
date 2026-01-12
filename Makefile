@@ -11,6 +11,7 @@ setup:
 	docker compose exec php composer install
 	docker compose exec php yarn install
 	docker compose exec php yarn encore dev
+	docker compose exec php php bin/console cache:clear
 	#docker compose exec php php bin/console doctrine:migrations:migrate -n
 
 reset:
