@@ -37,7 +37,7 @@ class FilterController extends AbstractController
         $this->filterValuesRepository = $filterValuesRepository;
     }
 
-    #[Route('/filter/new', name: 'new_filter')]
+    #[Route('/filter/new', name: 'filter_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $filter = new Filter();
@@ -60,14 +60,13 @@ class FilterController extends AbstractController
         return $this->render('MainBundle/_form.html.twig', [
             'form' => $form->createView(),
             'criteria' => $filter->getCriteria(),
-            'types' => $filter,
         ]);
     }
 
-    #[Route('/filter/edit/{id}', name: 'edit_filter', methods: ['GET'])]
+    #[Route('/filter/edit/{id}', name: 'filter_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, int $id, EntityManagerInterface $entityManager): Response
     {
-        $filter = $entityManager->getRepository(Filter::class)->find($id);
+        $filter = $this->filtersRepository->find($id);
         if (!$filter) {
             return new Response('Filter not found', 404);
         }
@@ -103,10 +102,10 @@ class FilterController extends AbstractController
         ]);
     }
 
-    #[Route('/filter/delete/{id}', name: 'delete_filter', methods: ['DELETE'])]
+    #[Route('/filter/delete/{id}', name: 'filter_delete', methods: ['DELETE'])]
     public function delete(int $id, EntityManagerInterface $entityManager): JsonResponse
     {
-        $filter = $entityManager->getRepository(Filter::class)->find($id);
+        $filter = $this->filtersRepository->find($id);
         if (!$filter) {
             return new JsonResponse(['message' => 'Filter not found'], 404);
         }
@@ -116,7 +115,7 @@ class FilterController extends AbstractController
         return new JsonResponse(['message' => 'Filter deleted successfully'], 200);
     }
 
-    #[Route('/api/subtypes/{typeId}', name: 'get_subtypes', methods: ['GET'])]
+    #[Route('/api/subtypes/{typeId}', name: 'api_filter_subtypes', methods: ['GET'])]
     public function getSubtypes(int $typeId): JsonResponse
     {
         $subtypes = $this->filterSubtypesRepository->findBy(['type' => $typeId]);
@@ -132,7 +131,7 @@ class FilterController extends AbstractController
         return new JsonResponse($data);
     }
 
-    #[Route('/api/valuetype/{typeId}', name: 'get_value_type', methods: ['GET'])]
+    #[Route('/api/valuetype/{typeId}', name: 'api_filter_value_type', methods: ['GET'])]
     public function getValueType(int $typeId): JsonResponse
     {
         $valueType = $this->filterValuesRepository->findValueTypeByTypeId($typeId);
@@ -144,7 +143,7 @@ class FilterController extends AbstractController
         return new JsonResponse(['valueType' => $valueType]);
     }
 
-    #[Route('/api/filtervalues', name: 'get_filtervalues', methods: ['GET'])]
+    #[Route('/api/filtervalues', name: 'api_filter_values', methods: ['GET'])]
     public function getFilterValues(): JsonResponse
     {
         $filterValue = $this->filterValuesRepository->findAll();

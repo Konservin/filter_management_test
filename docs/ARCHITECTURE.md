@@ -1,6 +1,7 @@
 # Filter Management Application – Technical Documentation
 ## 1. Overview
-This project is a Symfony-based web application designed to manage filters composed of multiple criteria.
+This project is a Symfony-based web application designed to manage filters composed of multiple criteria. 
+It can potentially be used to create either global filters by admin or personalized filters by user.
 Each criterion consists of a type, subtype, and value, with dynamic behavior depending on the selected type. Subtype and value fields change upon changing the type.
 
 ## 2. Architectural Goals
@@ -207,9 +208,8 @@ These were considered outside the scope of the assignment.
 
 ## 10. Future Improvements
 Possible future extensions:
-- REST API for adding filter types
+- REST API for adding filter types and subtypes
 - Full SPA frontend
 - Authentication & authorization
 - Adding types and subtypes
 - Improved UX and accessibility
-- Automated tests

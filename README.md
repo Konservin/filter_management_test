@@ -2,6 +2,9 @@
 
 This project is a Symfony-based web application for managing **filters** and their **criteria**.
 
+It ships with a working ```.env``` file suitable for local development and testing in Docker.
+No manual environment variable setup is required to run the application locally or to execute tests. As thus, it's not suited for production deploy.
+
 ---
 
 ## Tech Stack
@@ -116,6 +119,11 @@ Ensure the following ports are free:
 docker ps
 ```
 If a port is already in use, stop the conflicting container or adjust the port mapping in docker-compose.yml.
+
+### Run tests:
+```bash
+make tests
+```
 
 ---
 ## Documentation

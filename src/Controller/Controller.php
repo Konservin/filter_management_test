@@ -29,11 +29,7 @@ final class Controller extends AbstractController
     #[Route('//', name: 'app__')]
     public function index(): Response
     {
-        $filtersRepository = $this->filtersRepository;
-        $filterTypesRepository = $this->filterTypesRepository;
-        $filterSubTypesRepository = $this->filterSubTypesRepository;
-
-        $filterEntities = $filtersRepository->findAll();
+        $filterEntities = $this->filtersRepository->findAll();
         $filters = [];
         foreach ($filterEntities as $filter) {
             $criteria = [];

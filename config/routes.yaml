@@ -4,20 +4,3 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-filter_list:
-  path: /
-  controller: App\Controller\Controller::index
-
-new_filter:
-  path: /filter/new
-  controller: App\Controller\FilterController::new
-
-edit_filter:
-  path: /filter/edit/{id}
-  controller: App\Controller\FilterController::edit
-
-delete_filter:
-  path: /filter/delete/{id}
-  controller: App\Controller\FilterController::delete
-
-

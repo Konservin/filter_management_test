@@ -1,4 +1,4 @@
-{{ form_start(form, {'action': path('new_filter'), 'attr': {'id': 'filterForm'}}) }}
+{{ form_start(form, {'action': path('filter_new'), 'attr': {'id': 'filterForm'}}) }}
 {{ form_row(form.name) }}
 {% do form.criteria.setRendered %}
 

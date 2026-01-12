@@ -1,4 +1,4 @@
-.PHONY: install update clean dev load assets optimize setup
+.PHONY: test setup reset webr_dev
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -24,5 +24,6 @@ reset:
 webr_dev:
 	docker compose exec php yarn encore dev
 
-tests:
-	docker compose exec php bin/phpunit
+test:
+	docker compose exec php php bin/console cache:clear --env=test
+	docker compose exec -e APP_ENV=test php php bin/phpunit
