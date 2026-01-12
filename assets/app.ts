@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wireModalSave({
             containerEl: filterFormContainer,
             saveBtnId: "save-filter-btn",
-            actionUrl: "/filter/new/modal",
+            actionUrl: "/filter/new",
             afterRender: wireNewSave,
         });
     };
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (filterModal && filterFormContainer) {
         filterModal.addEventListener("show.bs.modal", async () => {
             try {
-                await fetchIntoContainer("/filter/new/modal", filterFormContainer);
+                await fetchIntoContainer("/filter/new", filterFormContainer);
                 wireNewSave();
             } catch (err) {
                 console.error("Error loading new filter form:", err);
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wireModalSave({
             containerEl: editFilterFormContainer,
             saveBtnId: "saveEditFilterBtn",
-            actionUrl: `/filter/edit/modal/${filterId}`,
+            actionUrl: `/filter/edit/${filterId}`,
             afterRender: wireEditSave,
         });
     };
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             editFilterFormContainer.dataset.filterId = String(filterId);
-            await fetchIntoContainer(`/filter/edit/modal/${filterId}`, editFilterFormContainer);
+            await fetchIntoContainer(`/filter/edit/${filterId}`, editFilterFormContainer);
             wireEditSave();
         } catch (err) {
             console.error("Error loading edit filter form:", err);

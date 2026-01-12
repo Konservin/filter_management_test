@@ -37,8 +37,8 @@ class FilterController extends AbstractController
         $this->filterValuesRepository = $filterValuesRepository;
     }
 
-    #[Route('/filter/new/modal', name: 'new_filter_modal')]
-    public function newModal(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/filter/new', name: 'new_filter')]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $filter = new Filter();
         $form = $this->createForm(FiltersType::class, $filter);
@@ -64,8 +64,8 @@ class FilterController extends AbstractController
         ]);
     }
 
-    #[Route('/filter/edit/modal/{id}', name: 'edit_filter_modal', methods: ['GET'])]
-    public function editModal(Request $request, int $id, EntityManagerInterface $entityManager): Response
+    #[Route('/filter/edit/{id}', name: 'edit_filter', methods: ['GET'])]
+    public function edit(Request $request, int $id, EntityManagerInterface $entityManager): Response
     {
         $filter = $entityManager->getRepository(Filter::class)->find($id);
         if (!$filter) {

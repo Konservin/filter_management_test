@@ -12,17 +12,9 @@ new_filter:
   path: /filter/new
   controller: App\Controller\FilterController::new
 
-new_filter_modal:
-  path: /filter/new/modal
-  controller: App\Controller\FilterController::newModal
-
 edit_filter:
   path: /filter/edit/{id}
   controller: App\Controller\FilterController::edit
-
-edit_filter_modal:
-  path: /filter/edit/modal/{id}
-  controller: App\Controller\FilterController::editModal
 
 delete_filter:
   path: /filter/delete/{id}

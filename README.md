@@ -74,6 +74,7 @@ docker compose exec php php bin/console doctrine:migrations:migrate -n
 ```bash
 http://localhost:8090
 ```
+---
 ## Platform Notes
 ### Linux
 - Works out of the box on Ubuntu 22.04+.
@@ -87,6 +88,7 @@ http://localhost:8090
 - Enable WSL2 integration
 - Run all commands from inside WSL (Ubuntu recommended)
 
+---
 ## Common Commands
 ### Rebuild containers
 ```bash
@@ -114,3 +116,7 @@ Ensure the following ports are free:
 docker ps
 ```
 If a port is already in use, stop the conflicting container or adjust the port mapping in docker-compose.yml.
+
+---
+## Documentation
+- [Architecture](docs/ARCHITECTURE.md)

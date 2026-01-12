@@ -3,8 +3,8 @@
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "setup		set up the original test project"
-	@echo "reload_dev	For debugging purposes, make a simple Docker reload"
-	@echo "*_dev		More dev related commands, look in code"
+	@echo "reset		reset project"
+	@echo "webr			For debugging purposes, make a simple encore reload"
 
 setup:
 	docker compose up -d --build
@@ -19,24 +19,10 @@ reset:
 	docker compose exec php composer install
 	docker compose exec php yarn install
 	docker compose exec php yarn encore dev
-	#docker compose exec php php bin/console
-
-reload_dev:
-	sudo chown -R 33:33 .
-	docker restart symfony_php
+	docker compose exec php php bin/console cache:clear
 
 webr_dev:
-	sudo chown -R $$(whoami):$$(whoami) .
-	npm run dev
-	sudo chown -R 33:33 .
-	docker restart symfony_php
+	docker compose exec php yarn encore dev
 
-edit_dev:
-	sudo chown -R $$(whoami):$$(whoami) .
-
-rebuild_dev:
-	sudo chown -R $$(whoami):$$(whoami) .
-	npm run dev
-	sudo chown -R 33:33 .
-	docker-compose down --volumes && docker-compose build --no-cache && docker-compose up -d
-	sudo chown -R 33:33 .
+tests:
+	docker compose exec php bin/phpunit
